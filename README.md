@@ -1,53 +1,186 @@
-# Earnings Call Sentiment Analysis
+# Earnings Call Sentiment Analyzer
 
-This project analyzes an earnings call transcript to:
+A comprehensive tool for analyzing earnings call transcripts to extract sentiment, key topics, and insights using AI-powered analysis.
 
-- Extract key topics discussed
-- Assign a sentiment score to each topic using an LLM (no lexical methods)
-- Estimate time spent on each topic
-- Generate an interactive treemap heatmap report (size = time, color = sentiment)
+## 🚀 Quick Start
 
-The report is exported as `report.html` in the `reports/` folder.
+### Prerequisites
+- Python 3.9+
+- OpenAI API key
 
-## Setup
-
-1. Python 3.10+
-2. Install dependencies:
-
+### Installation
 ```bash
+# Clone the repository
+git clone <your-repo-url>
+cd ctev_investor_sentiment_analysis
+
+# Create virtual environment
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
+
+# Set up environment variables
+echo "OPENAI_API_KEY=your_api_key_here" > .env
 ```
 
-3. Set your OpenAI API key in environment:
-
-- Create `.env` in the project root with:
-
-```
-OPENAI_API_KEY=your_api_key_here
-OPENAI_MODEL=gpt-4o-mini
-```
-
-You can override `OPENAI_MODEL` via CLI flag.
-
-## Usage
-
+### Run the Application
 ```bash
-python -m src.cli --input data/sample_transcript.txt --wpm 155 --model gpt-4o-mini
+streamlit run streamlit_app.py
 ```
 
-- `--input`: path to transcript `.txt`
-- `--wpm`: average words per minute to estimate time (default 155)
-- `--model`: OpenAI model name
+The app will open at `http://localhost:8501`
 
-The script will:
+## 🔧 Recent Fixes
 
-1. Chunk the transcript by paragraphs.
-2. Ask the LLM to extract a topic and sentiment score in [-1, 1] per chunk.
-3. Aggregate time per topic from word counts and speaking rate.
-4. Generate a treemap heatmap saved to `reports/report.html`.
+### Issue 1: Heatmap "Earnings Call" Outline ✅ FIXED
+- **Problem**: The treemap was showing an unnecessary "Earnings Call" root node
+- **Solution**: Removed the `px.Constant("Earnings Call")` from the treemap path
+- **Result**: Clean, direct topic visualization without extra hierarchy
 
-## Notes
+### Issue 2: Index Numbers in Table ✅ FIXED
+- **Problem**: The detailed analysis table was showing pandas index numbers
+- **Solution**: Added `reset_index(drop=True)` to remove index column
+- **Result**: Clean table with only relevant data columns
 
-- No lexical sentiment dictionary is used. All sentiment is inferred by the LLM.
-- If all sentiment scores are non-negative, the color scale is adjusted to show neutral→positive only.
-- The output includes a color legend and hover details per topic.
+### Issue 3: Transcript Noise ✅ FIXED
+- **Problem**: Transcript displayed with speaker labels and formatting artifacts
+- **Solution**: Added `clean_transcript_text()` function to remove:
+  - Speaker labels (e.g., "Travis Dalton:")
+  - Bracketed text and parenthetical content
+  - Multiple spaces and newlines
+  - Header lines
+- **Result**: Clean, readable transcript text
+
+### Issue 4: WeasyPrint Library Error ✅ FIXED
+- **Problem**: `libgobject-2.0-0` system dependency missing on macOS
+- **Solution**: 
+  - Graceful error handling with helpful error messages
+  - Automatic fallback to HTML-only reports
+  - Installation script for system dependencies
+- **Result**: App works regardless of PDF generation capability
+
+## 📊 Features
+
+### Core Analysis
+- **Sentiment Analysis**: AI-powered sentiment scoring for each topic
+- **Topic Extraction**: Automatic identification of key discussion areas
+- **Time Analysis**: Estimate time spent on each topic based on word count
+- **Rationale Generation**: AI explanations for sentiment scores
+
+### Visualization
+- **Sentiment Heatmap**: Interactive squarify treemap showing topic size (time) and color (sentiment)
+- **Detailed Tables**: Comprehensive breakdown of analysis results
+- **Transcript Highlighting**: Negative sentiment sentences highlighted for quick review
+
+### Export Options
+- **HTML Reports**: Self-contained reports with interactive visualizations
+- **PDF Reports**: Professional reports for presentations (requires system dependencies)
+
+## 🛠️ System Dependencies
+
+### For PDF Generation (Optional)
+If you want to generate PDF reports, install system dependencies:
+
+#### macOS
+```bash
+# Run the automated installer
+./install_dependencies.sh
+
+# Or manually install with Homebrew
+brew install cairo pango gdk-pixbuf libffi
+```
+
+#### Ubuntu/Debian
+```bash
+sudo apt-get install libcairo2-dev libpango1.0-dev libgdk-pixbuf2.0-dev libffi-dev
+```
+
+#### CentOS/RHEL
+```bash
+sudo yum install cairo-devel pango-devel gdk-pixbuf2-devel libffi-devel
+```
+
+### Alternative: Docker
+If you prefer to avoid system dependencies, use the provided Dockerfile:
+```bash
+docker build -t sentiment-analyzer .
+docker run -p 8501:8501 sentiment-analyzer
+```
+
+## 📁 Project Structure
+
+```
+ctev_investor_sentiment_analysis/
+├── data/                          # Sample transcript data
+├── src/                           # Core analysis modules
+│   ├── pipeline.py               # Main analysis pipeline
+│   ├── llm_client.py            # OpenAI API client
+│   └── report.py                # Report generation
+├── streamlit_app.py              # Web application
+├── requirements.txt              # Python dependencies
+├── install_dependencies.sh       # System dependency installer
+├── DEPLOYMENT_GUIDE.md          # Detailed deployment instructions
+└── README.md                    # This file
+```
+
+## 🎯 Usage
+
+### 1. Upload Transcript
+- Support for `.txt` and `.docx` files
+- Use the sample transcript for testing
+
+### 2. Configure Analysis
+- **Model Selection**: Choose OpenAI model (gpt-4o-mini recommended for speed)
+- **WPM Setting**: Adjust speaking speed for time calculations
+- **Max Topics**: Control number of topics to analyze
+- **Custom Topics**: Define specific topics of interest
+
+### 3. Run Analysis
+- Click "Run Report" to start analysis
+- View results in interactive visualizations
+- Download reports in HTML or PDF format
+
+### 4. Interpret Results
+- **Sentiment Scores**: -1.0 (very negative) to +1.0 (very positive)
+- **Topic Size**: Represents time spent discussing each topic
+- **Color Coding**: Red (negative) to Green (positive) sentiment
+
+## 🔍 Sample Analysis
+
+The app includes a sample transcript from Claritev Corp's Q2 2025 earnings call for testing and demonstration purposes.
+
+## 🚨 Troubleshooting
+
+### Common Issues
+
+1. **WeasyPrint Errors**: Run `./install_dependencies.sh` or check DEPLOYMENT_GUIDE.md
+2. **Import Errors**: Ensure virtual environment is activated and requirements are installed
+3. **API Errors**: Verify OpenAI API key is set in `.env` file
+4. **Memory Issues**: Use smaller models (gpt-4o-mini) for large transcripts
+
+### Getting Help
+- Check the DEPLOYMENT_GUIDE.md for detailed troubleshooting
+- Review error messages in the Streamlit interface
+- Ensure all dependencies are properly installed
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- OpenAI for providing the GPT models
+- Streamlit for the web framework
+- Plotly for interactive visualizations
+- Matplotlib and Squarify for treemap visualization
+- The open-source community for various supporting libraries

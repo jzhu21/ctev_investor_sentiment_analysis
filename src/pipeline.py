@@ -3,18 +3,24 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, Optional
+from dotenv import load_dotenv
 
 import pandas as pd
 
 from .llm_client import LLMClient, ChunkAnalysis
+
+# Load environment variables
+load_dotenv()
 
 
 @dataclass
 class PipelineConfig:
     input_path: Path
     words_per_minute: int = 155
-    model: str | None = None
+    model: str = "gpt-4o-mini"
+    max_topics: int = 10
+    custom_topics: Optional[List[str]] = None
 
 
 def read_transcript(path: Path) -> str:
@@ -38,36 +44,37 @@ def estimate_minutes(word_count: int, wpm: int) -> float:
 
 
 def run_pipeline(config: PipelineConfig) -> pd.DataFrame:
-    text = read_transcript(config.input_path)
-    chunks = split_into_chunks(text)
-
+    """Run the sentiment analysis pipeline."""
+    text = config.input_path.read_text(encoding="utf-8")
+    
     client = LLMClient(model=config.model)
-    analyses: List[ChunkAnalysis] = client.analyze_chunks(chunks)
-
+    
+    if config.custom_topics:
+        # Use custom topics defined by user
+        analysis = client.analyze_with_custom_topics(text, config.custom_topics, config.words_per_minute)
+    else:
+        # Use AI-generated topics
+        analysis = client.analyze_full_transcript(text, config.words_per_minute)
+    
+    # Convert to DataFrame
     records = []
-    for chunk, analysis in zip(chunks, analyses):
-        words = len(chunk.split())
-        minutes = estimate_minutes(words, config.words_per_minute)
-        records.append(
-            {
-                "topic": analysis.topic.strip()[:60],
-                "sentiment": float(analysis.sentiment),
-                "minutes": minutes,
-                "words": words,
-                "rationale": analysis.rationale,
-            }
-        )
-
+    for topic_analysis in analysis.topics:
+        records.append({
+            "topic": topic_analysis.topic,
+            "sentiment": topic_analysis.sentiment,
+            "minutes": topic_analysis.minutes,
+            "words": topic_analysis.words,
+            "rationale": topic_analysis.rationale,
+        })
+    
     df = pd.DataFrame(records)
+    
     if df.empty:
         return df
-
-    # Aggregate by topic
-    agg = (
-        df.groupby("topic", as_index=False)
-        .agg({"sentiment": "mean", "minutes": "sum", "words": "sum"})
-        .sort_values("minutes", ascending=False)
-    )
-    # Normalize and keep useful ordering
-    agg["sentiment"] = agg["sentiment"].clip(-1, 1)
-    return agg
+    
+    # Sort by time spent and limit topics
+    df = df.sort_values("minutes", ascending=False)
+    if len(df) > config.max_topics:
+        df = df.head(config.max_topics)
+    
+    return df

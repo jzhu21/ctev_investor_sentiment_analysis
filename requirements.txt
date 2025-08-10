@@ -1,6 +1,9 @@
-openai>=1.55.0
-pandas>=2.2.2
-numpy>=2.0.0
-plotly>=5.22.0
-pydantic>=2.7.0
-python-dotenv>=1.0.1
+openai>=1.0.0
+pandas>=1.5.0
+plotly>=5.0.0
+streamlit>=1.28.0
+python-dotenv>=1.0.0
+python-docx>=0.8.11
+weasyprint>=60.0
+matplotlib>=3.5.0
+squarify>=0.4.3
