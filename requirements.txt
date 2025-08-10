@@ -1,0 +1,6 @@
+openai>=1.55.0
+pandas>=2.2.2
+numpy>=2.0.0
+plotly>=5.22.0
+pydantic>=2.7.0
+python-dotenv>=1.0.1
