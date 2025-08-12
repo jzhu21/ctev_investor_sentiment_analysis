@@ -110,18 +110,6 @@ The script will prompt you to select an earnings call transcript to analyze.
 2. **API Errors**: Verify OpenAI API key is set in `.env` file
 3. **Memory Issues**: Use gpt-5 for best results, ensure sufficient API credits
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## 🙏 Acknowledgments
 
 - OpenAI for providing the GPT-5 model
