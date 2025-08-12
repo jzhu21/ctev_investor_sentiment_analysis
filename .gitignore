@@ -52,7 +52,10 @@ Thumbs.db
 # Reports and output
 reports/
 *.html
+
+# JSON files (but allow analysis results)
 *.json
+!output/*.json
 
 # Logs
 *.log

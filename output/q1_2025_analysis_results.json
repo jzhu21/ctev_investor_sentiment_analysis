@@ -1,0 +1,80 @@
+[
+  {
+    "topic": "Revenue Trends",
+    "word_count": 280,
+    "sentiment": -0.2,
+    "reasoning": "Q1 revenue declined 1.4% year over year and 0.4% sequentially, with pressure from one large client and lower PSA revenue yield despite some offsets."
+  },
+  {
+    "topic": "EBITDA Margin",
+    "word_count": 140,
+    "sentiment": 0.1,
+    "reasoning": "Adjusted EBITDA of $142.1M had margin of 61.4%, down 120 bps YoY but up 40 bps sequentially and slightly above internal expectations."
+  },
+  {
+    "topic": "Cash Flow",
+    "word_count": 160,
+    "sentiment": -0.5,
+    "reasoning": "Operating cash flow and levered FCF were uses of cash, leverage remains high at 8.1x after refinancing, and cash balance is modest at $23.1M."
+  },
+  {
+    "topic": "Pipeline Growth",
+    "word_count": 260,
+    "sentiment": 0.8,
+    "reasoning": "Pipeline expanded 127% QoQ, average ACV rose 35%, win rate climbed 32%, and roughly half the funnel is white space at existing clients."
+  },
+  {
+    "topic": "Client Renewals",
+    "word_count": 170,
+    "sentiment": 0.6,
+    "reasoning": "Three-year renewal with largest client and a five-year $13M ACV renewal with a top-20 client underscore 98.6% NRR and support guidance."
+  },
+  {
+    "topic": "Payment Integrity",
+    "word_count": 190,
+    "sentiment": 0.8,
+    "reasoning": "Payment & Revenue Integrity revenue grew 9.7% YoY and 11.5% QoQ, hitting the highest quarter since 2Q22 and labeled a business highlight."
+  },
+  {
+    "topic": "Digital Transformation",
+    "word_count": 260,
+    "sentiment": 0.7,
+    "reasoning": "OCI migration is showing 4\u20137x performance gains and a new cloud ERP went live, expected to lower TCO and improve scalability and analytics."
+  },
+  {
+    "topic": "Provider Strategy",
+    "word_count": 230,
+    "sentiment": 0.7,
+    "reasoning": "CompleteView traction, 100+ leads from Becker\u2019s, growing provider client base, and planned \u2018Vitality\u2019 quality reporting suggest momentum."
+  },
+  {
+    "topic": "VDHP Offering",
+    "word_count": 210,
+    "sentiment": 0.7,
+    "reasoning": "VDHP is the largest segment of the 2025 active pipeline; integration of ACE and a new broker model are designed to accelerate revenue."
+  },
+  {
+    "topic": "International Expansion",
+    "word_count": 240,
+    "sentiment": 0.5,
+    "reasoning": "MOU with Burjeel/Virgil targets GCC markets with US-style coding; leadership expects initial revenue this year and sees strong fit, though early-stage."
+  },
+  {
+    "topic": "Sales Organization",
+    "word_count": 200,
+    "sentiment": 0.6,
+    "reasoning": "New growth org, sales kickoff, 13 new sellers, and structured roles (BD, client success, new markets) improve go-to-market discipline."
+  },
+  {
+    "topic": "Lantern Partnership",
+    "word_count": 150,
+    "sentiment": 0.7,
+    "reasoning": "Channel partnership enhances VDHP and BEN Insights with specialty care navigation; revenue-sharing model expands reach with limited incremental cost."
+  },
+  {
+    "topic": "Market Environment",
+    "word_count": 140,
+    "sentiment": 0.2,
+    "reasoning": "Management frames rising healthcare costs and transparency mandates as tailwinds for Claritev\u2019s analytics and cost-reduction capabilities."
+  }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "topic": "Revenue Growth",
+    "word_count": 360,
+    "sentiment": 0.6,
+    "reasoning": "Q2 revenue rose 3.5% y/y and 4.4% q/q, with YTD up 5.4% ex-attrition, indicating resumed growth though at modest rates."
+  },
+  {
+    "topic": "EBITDA Margins",
+    "word_count": 210,
+    "sentiment": 0.7,
+    "reasoning": "Adjusted EBITDA was $154M in Q2 and $296.1M YTD with margins of 63.8% and 62.6%, reflecting strong profitability and cost control."
+  },
+  {
+    "topic": "Pipeline Growth",
+    "word_count": 280,
+    "sentiment": 0.8,
+    "reasoning": "New pipeline creation exceeded $130M with a 77% increase since January; growth areas (VDHP and DNDS) are ~40% of the pipeline, signaling robust future demand."
+  },
+  {
+    "topic": "Client Wins",
+    "word_count": 230,
+    "sentiment": 0.9,
+    "reasoning": "A top-5 and a top-20 client were renewed for five years, nine new logos were signed, and 135 opportunities closed with $16M ACV, reflecting strong commercial traction."
+  },
+  {
+    "topic": "Provider Market",
+    "word_count": 170,
+    "sentiment": 0.6,
+    "reasoning": "Three new provider logos and progress with the CompleteView platform indicate early success and growing pipeline in a newer vertical."
+  },
+  {
+    "topic": "International Expansion",
+    "word_count": 230,
+    "sentiment": 0.7,
+    "reasoning": "Agreements with Burjeel and Pergeo/ClaimsCare establish a foothold in MENA with clear use cases (claims/payment accuracy), pointing to meaningful overseas growth potential."
+  },
+  {
+    "topic": "Partnerships",
+    "word_count": 260,
+    "sentiment": 0.5,
+    "reasoning": "Echo delivered three new wins and integrations with athena and Oracle HCM are live, though Lantern is still early; momentum is positive but ramp is developing."
+  },
+  {
+    "topic": "Cloud Migration",
+    "word_count": 120,
+    "sentiment": 0.6,
+    "reasoning": "Migration to Oracle Cloud Infrastructure is on schedule with 13\u201317% performance improvements, supporting scalability and product velocity."
+  },
+  {
+    "topic": "AI Strategy",
+    "word_count": 280,
+    "sentiment": 0.7,
+    "reasoning": "A new Chief AI Officer, a dozen predictive AI initiatives, governance via CHAI membership, and future automation use cases signal committed, responsible AI-led innovation."
+  },
+  {
+    "topic": "Cost Reduction",
+    "word_count": 180,
+    "sentiment": 0.6,
+    "reasoning": "Four facility closures, 3% fewer headcount y/y, and a business case office support a 10\u201315% multiyear net cost reduction goal despite targeted reinvestments."
+  },
+  {
+    "topic": "Legislation Impact",
+    "word_count": 220,
+    "sentiment": 0.7,
+    "reasoning": "HR1\u2019s IRC 174 expensing drives $60\u201390M 2025 FCF benefit and ~$30M annually thereafter; some caution remains around Medicaid/RHT impacts."
+  },
+  {
+    "topic": "Guidance Update",
+    "word_count": 200,
+    "sentiment": 0.5,
+    "reasoning": "Revenue guidance was raised to flat to +2% with EBITDA margin maintained and FCF midpoint lifted to flat; tone is constructive but conservatively framed."
+  },
+  {
+    "topic": "Capital Markets",
+    "word_count": 110,
+    "sentiment": 0.8,
+    "reasoning": "Shares ranked among top 15 small-cap performers YTD, re-entry to the Russell 2000, and ~1,000 bps debt pricing improvement underscore external confidence."
+  },
+  {
+    "topic": "Payment Integrity",
+    "word_count": 240,
+    "sentiment": 0.7,
+    "reasoning": "Payment and Revenue Integrity posted a strong quarter with higher savings yield; ACE grew double digits, and IDR outcomes improved with a reported ~22% CMS win rate."
+  }
+]

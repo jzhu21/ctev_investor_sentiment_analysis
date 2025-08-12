@@ -1,0 +1,86 @@
+[
+  {
+    "topic": "Brand Strategy",
+    "word_count": 320,
+    "sentiment": 0.6,
+    "reasoning": "Management framed the rebrand as earned and highlighted visibility moves (ticker change, NYSE bell) and messaging cohesion, signaling confidence and momentum."
+  },
+  {
+    "topic": "Vision 2030",
+    "word_count": 210,
+    "sentiment": 0.7,
+    "reasoning": "Repeated emphasis on a clear long-term plan, broad ecosystem focus, and operating rigor supports a constructive outlook."
+  },
+  {
+    "topic": "Transformation Program",
+    "word_count": 460,
+    "sentiment": 0.6,
+    "reasoning": "Three-pronged program (digital enablement, business realignment, process optimization) targets 10%-15% cost base reduction and faster growth, reflecting proactive execution."
+  },
+  {
+    "topic": "Oracle Partnership",
+    "word_count": 230,
+    "sentiment": 0.8,
+    "reasoning": "Multiyear OCI agreement unlocks modernization, AI enablement, operating leverage, and Oracle marketplace distribution, expanding reach and efficiency."
+  },
+  {
+    "topic": "Debt Refinancing",
+    "word_count": 220,
+    "sentiment": 0.9,
+    "reasoning": "99.75% participation, extended maturities, and supportive creditor feedback materially de-risk the balance sheet and validate the strategy."
+  },
+  {
+    "topic": "2024 Results",
+    "word_count": 520,
+    "sentiment": -0.2,
+    "reasoning": "Revenue declined 3.2% and adjusted EBITDA fell 6.7% with margin compression; management cited client-specific and NSA-related headwinds."
+  },
+  {
+    "topic": "2025 Guidance",
+    "word_count": 380,
+    "sentiment": 0.2,
+    "reasoning": "Top line guided down 2% to flat with stable margins and sequential improvement through the year; cautious but constructive tone."
+  },
+  {
+    "topic": "NSA Impact",
+    "word_count": 200,
+    "sentiment": -0.5,
+    "reasoning": "Change outage and a CMS 120\u2011day IDR exception created volume and mix pressure; management expects stabilization but near-term drag persists."
+  },
+  {
+    "topic": "Client Renewals",
+    "word_count": 210,
+    "sentiment": 0.6,
+    "reasoning": "One of the largest clients renewed for three years at current value, improving revenue visibility despite broader competitive dynamics."
+  },
+  {
+    "topic": "Sales Pipeline",
+    "word_count": 180,
+    "sentiment": 0.7,
+    "reasoning": "Growing pipeline with 12 enterprise deals, 37 PlanOptix opportunities, and 39 BenInsights pursuits indicates building demand."
+  },
+  {
+    "topic": "Product Launches",
+    "word_count": 190,
+    "sentiment": 0.8,
+    "reasoning": "New offerings (CompleteVue, BenInsights) and PlanOptix wins plus a $34M TCV enterprise deal showcase product-market traction."
+  },
+  {
+    "topic": "Cost Efficiency",
+    "word_count": 150,
+    "sentiment": 0.6,
+    "reasoning": "Shared services, automation, and ERP modernization aim for meaningful operating cost reductions and leverage."
+  },
+  {
+    "topic": "Market Expansion",
+    "word_count": 220,
+    "sentiment": 0.7,
+    "reasoning": "Payer, provider, employer, government, and partner channels (J2, pet wellness, Oracle sales) broaden TAM and routes to market."
+  },
+  {
+    "topic": "Pricing Packaging",
+    "word_count": 110,
+    "sentiment": 0.3,
+    "reasoning": "New pricing and packaging discipline and deal management should enhance monetization, though impact is prospective."
+  }
+]
