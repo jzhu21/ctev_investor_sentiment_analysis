@@ -83,15 +83,19 @@ class TranscriptAnalyzer:
         
         try:
             print("Calling OpenAI API for transcript analysis...")
-            response = self.client.chat.completions.create(
-                model="gpt-4",
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.3,
-                max_tokens=1000
+            response = self.client.responses.create(
+                model="gpt-5",
+                input=prompt,
+                text={
+                    "verbosity": "detailed"
+                },
+                reasoning={
+                    "effort": "minimal"
+                }
             )
             
             # Extract and parse JSON response
-            content = response.choices[0].message.content
+            content = response.output[0].content[0].text
             # Find JSON array in the response
             json_match = re.search(r'\[.*\]', content, re.DOTALL)
             if json_match:

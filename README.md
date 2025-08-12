@@ -2,6 +2,39 @@
 
 A comprehensive tool for analyzing earnings call transcripts to extract sentiment, key topics, and insights using AI-powered analysis.
 
+## 🏗️ Repository Structure
+
+```
+ctev_investor_sentiment_analysis/
+├── src/                           # Source code
+│   ├── ctev_earnings_call_analysis.py  # Main analysis script
+│   ├── pipeline.py               # Analysis pipeline
+│   ├── llm_client.py             # OpenAI API client
+│   ├── report.py                 # Report generation
+│   ├── cli.py                    # Command line interface
+│   └── __init__.py               # Package initialization
+├── data/                          # Transcript data
+│   ├── Claritev Earnings Call Transcript 2024 Q4.txt
+│   ├── Claritev Earnings Call Transcript 2025 Q1.txt
+│   └── Claritev Earnings Call Transcript 2025 Q2.txt
+├── output/                        # Generated outputs
+│   ├── q4_2024_analysis_results.json
+│   ├── q4_2024_sentiment_heatmap.png
+│   ├── q1_2025_analysis_results.json
+│   ├── q1_2025_sentiment_heatmap.png
+│   ├── q2_2025_analysis_results.json
+│   └── q2_2025_sentiment_heatmap.png
+├── archive/                       # Unused/legacy files
+│   ├── reports/                   # Old report files
+│   ├── sentiment_treemap.py      # Old treemap implementation
+│   ├── transcript_analyzer.py    # Old transcript analyzer
+│   └── ...                       # Other legacy files
+├── requirements.txt               # Python dependencies
+├── install_dependencies.sh        # System dependencies installer
+├── DEPLOYMENT_GUIDE.md           # Deployment instructions
+└── README.md                     # This file
+```
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -15,22 +48,30 @@ git clone <your-repo-url>
 cd ctev_investor_sentiment_analysis
 
 # Create virtual environment
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
 
 # Set up environment variables
 echo "OPENAI_API_KEY=your_api_key_here" > .env
+
+# Note: Virtual environment is not included in the repository
+# Create a fresh one for each new setup to avoid conflicts
 ```
 
 ### Run the Application
 ```bash
-streamlit run streamlit_app.py
+# Run the main analysis script
+python src/ctev_earnings_call_analysis.py
+
+# Or run individual modules
+python src/pipeline.py
+python src/cli.py
 ```
 
-The app will open at `http://localhost:8501`
+The script will prompt you to select an earnings call transcript to analyze.
 
 ## 🔧 Recent Fixes
 
@@ -132,7 +173,7 @@ ctev_investor_sentiment_analysis/
 - Use the sample transcript for testing
 
 ### 2. Configure Analysis
-- **Model Selection**: Choose OpenAI model (gpt-4o-mini recommended for speed)
+- **Model Selection**: Choose OpenAI model (gpt-5 recommended for accuracy)
 - **WPM Setting**: Adjust speaking speed for time calculations
 - **Max Topics**: Control number of topics to analyze
 - **Custom Topics**: Define specific topics of interest
@@ -158,7 +199,7 @@ The app includes a sample transcript from Claritev Corp's Q2 2025 earnings call 
 1. **WeasyPrint Errors**: Run `./install_dependencies.sh` or check DEPLOYMENT_GUIDE.md
 2. **Import Errors**: Ensure virtual environment is activated and requirements are installed
 3. **API Errors**: Verify OpenAI API key is set in `.env` file
-4. **Memory Issues**: Use smaller models (gpt-4o-mini) for large transcripts
+4. **Memory Issues**: Use gpt-5 for best results, ensure sufficient API credits
 
 ### Getting Help
 - Check the DEPLOYMENT_GUIDE.md for detailed troubleshooting

@@ -9,6 +9,8 @@ Supports Q4 2024, Q1 2025, and Q2 2025 transcripts.
 import os
 import json
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')  # Use non-interactive backend for saving
 import matplotlib.pyplot as plt
 import squarify
 import numpy as np
@@ -23,7 +25,7 @@ class EarningsCallAnalyzer:
     def __init__(self, quarter_name):
         """Initialize the analyzer with OpenAI client."""
         self.client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-        self.model = os.getenv('OPENAI_MODEL', 'gpt-4o-mini')
+        self.model = os.getenv('OPENAI_MODEL', 'gpt-5')
         self.quarter_name = quarter_name
         
         if not os.getenv('OPENAI_API_KEY'):
@@ -38,77 +40,108 @@ class EarningsCallAnalyzer:
             return f.read()
     
     def analyze_transcript(self, transcript):
-        """Use OpenAI to analyze sentiment for predefined topics from sentiment_treemap.py."""
-        
-        # Use exactly the same topics as sentiment_treemap.py
-        predefined_topics = [
-            "Operating Costs",
-            "Technology", 
-            "EBITDA",
-            "Net Income",
-            "Guidance",
-            "Capital",
-            "Revenue",
-            "Products",
-            "Debt",
-            "Sales",
-            "Customers",
-            "Govt.",
-            "Margins",
-            "Market Share"
-        ]
+        """Use OpenAI to analyze sentiment for LLM-identified topics from the transcript."""
         
         prompt = f"""
-        Analyze the following Q4 2024 Claritev earnings call transcript and provide sentiment scores for each of these specific topics.
+        Analyze the following {self.quarter_name} Claritev earnings call transcript and identify the key topics discussed.
         
-        For each topic, provide:
-        1. Topic name (exactly as listed)
+        For each identified topic, provide:
+        1. Topic name (maximum 2 words only - keep it concise)
         2. Word count in that topic section
         3. Sentiment score from -1.0 (very negative) to 1.0 (very positive)
+        4. Reasoning for the sentiment score (brief explanation of why this score was assigned)
         
         Return the results as a JSON array with this exact format:
         [
             {{
-                "topic": "Operating Costs",
+                "topic": "Topic Name",
                 "word_count": 150,
-                "sentiment": 0.7
+                "sentiment": 0.7,
+                "reasoning": "Brief explanation of why this sentiment score was assigned"
             }}
         ]
         
         Guidelines:
-        - Use exactly the topic names provided (do not change or modify them)
+        - Identify 8-15 key topics that are actually discussed in the transcript
+        - Keep each topic name to exactly 2 words maximum (e.g., "Operating Costs", "Net Income", "Market Share")
         - Count actual words in each topic section
         - Assign sentiment based on the tone and content of each topic discussion
         - Consider financial performance, strategic initiatives, and market positioning
         - Ensure sentiment scores are between -1.0 and 1.0
-        - If a topic is not discussed, assign a middle value (0.5) and set word count to 0
-        
-        Topics to analyze: {', '.join(predefined_topics)}
+        - Focus on business-relevant topics like financial metrics, operations, strategy, market conditions, etc.
+        - Do not include generic topics like "Introduction" or "Conclusion"
+        - Provide concise reasoning (1-2 sentences) explaining the sentiment score for each topic
         
         Transcript:
         {transcript}
         """
         
         try:
-            print("Calling OpenAI API for sentiment analysis of predefined topics...")
-            response = self.client.chat.completions.create(
+            print("Calling OpenAI API for LLM-identified topics and sentiment analysis...")
+            response = self.client.responses.create(
                 model=self.model,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.3,
-                max_tokens=1500
+                input=prompt,
+                text={
+                    "verbosity": "medium"
+                },
+                reasoning={
+                    "effort": "medium"
+                }
             )
             
             # Extract and parse JSON response
-            content = response.choices[0].message.content
             print("Raw API response:")
-            print(content)
+            print(response)
+            print(f"Response type: {type(response)}")
+            
+            # For GPT-5 responses API, extract content from the correct path
+            try:
+                if response.output and len(response.output) > 0:
+                    # Find the ResponseOutputMessage item (not the ResponseReasoningItem)
+                    message_item = None
+                    for item in response.output:
+                        if hasattr(item, 'content') and item.content:
+                            message_item = item
+                            break
+                    
+                    if message_item and message_item.content and len(message_item.content) > 0:
+                        content = message_item.content[0].text
+                        if content is None:
+                            raise ValueError("Content text is None")
+                    else:
+                        raise ValueError("No content in output")
+                else:
+                    raise ValueError("No output in response")
+                
+                print(f"Extracted content: {content}")
+                print(f"Content length: {len(content)} characters")
+            except Exception as e:
+                print(f"Error extracting content: {e}")
+                print(f"Response output structure: {response.output}")
+                if response.output and len(response.output) > 0:
+                    for i, item in enumerate(response.output):
+                        print(f"Output item {i}: {type(item).__name__} - {item}")
+                        if hasattr(item, 'content'):
+                            print(f"  Content: {item.content}")
+                raise
             
             # Find JSON array in the response
             json_match = re.search(r'\[.*\]', content, re.DOTALL)
             if json_match:
-                topics_data = json.loads(json_match.group())
-                return topics_data
+                try:
+                    topics_data = json.loads(json_match.group())
+                    return topics_data
+                except json.JSONDecodeError as e:
+                    print(f"JSON parsing error: {e}")
+                    print(f"Extracted content: {json_match.group()}")
+                    raise ValueError(f"Could not parse JSON: {e}")
             else:
+                print("No JSON array found in response")
+                print("Trying to find any JSON content...")
+                # Try to find any JSON-like content
+                json_like = re.search(r'\{.*\}', content, re.DOTALL)
+                if json_like:
+                    print(f"Found JSON-like content: {json_like.group()}")
                 raise ValueError("Could not extract JSON from LLM response")
                 
         except Exception as e:
@@ -119,7 +152,7 @@ class EarningsCallAnalyzer:
         """Save the analysis results to a JSON file."""
         # Create filename based on quarter
         quarter_safe = self.quarter_name.replace(" ", "_").lower()
-        output_file = f"{quarter_safe}_analysis_results.json"
+        output_file = f"output/{quarter_safe}_analysis_results.json"
         
         try:
             with open(output_file, 'w') as f:
@@ -166,21 +199,36 @@ class EarningsCallAnalyzer:
         
         print(f"Visualizing {len(df)} topics with word counts > 0")
         
-        # Prepare data for squarify - using exact same format as sentiment_treemap.py
+        # Prepare data for squarify
         topics = df['topic'].values
         sizes = df['word_count'].values
         sentiment = df['sentiment'].values
         
-        # Use color scheme from 0 to 1 (red to green) since all scores are positive
+        # Dynamically adjust color scheme based on sentiment range
         import matplotlib as mpl
-        norm = mpl.colors.Normalize(vmin=0, vmax=1)
-        cmap = mpl.cm.RdYlGn
+        
+        # Determine sentiment range for colorbar
+        min_sentiment = df['sentiment'].min()
+        max_sentiment = df['sentiment'].max()
+        
+        # If all scores are >= 0, use 0-1 range; if any < 0, use -1 to 1 range
+        if min_sentiment >= 0:
+            # All positive/neutral scores: use consistent 0-1 range for proper color mapping
+            norm = mpl.colors.Normalize(vmin=0, vmax=1)
+            cmap = mpl.cm.RdYlGn  # Green for positive, red for neutral
+            print(f"Using positive-only color scheme (0-1) - all sentiment scores >= 0")
+        else:
+            # Has negative scores: use full -1 to 1 range
+            norm = mpl.colors.Normalize(vmin=-1, vmax=1)
+            cmap = mpl.cm.RdYlGn  # Red for negative, green for positive
+            print(f"Using full-range color scheme (-1 to 1) - sentiment range: {min_sentiment:.2f} to {max_sentiment:.2f}")
+        
         colors = [cmap(norm(s)) for s in sentiment]
         
         # Create the plot with same figsize as sentiment_treemap.py
         fig, ax = plt.subplots(figsize=(12, 7))
         
-        # Plot treemap without labels first - using exact same parameters
+        # Plot treemap without labels first
         squarify.plot(
             sizes=sizes,
             label=None,  # Don't show labels initially
@@ -191,7 +239,7 @@ class EarningsCallAnalyzer:
             ax=ax
         )
         
-        # Manually add labels in lower left of each box - exact same code as sentiment_treemap.py
+        # Manually add labels in lower left of each box
         for i, topic in enumerate(topics):
             # Get the rectangle coordinates from squarify
             rect = ax.patches[i]
@@ -217,27 +265,34 @@ class EarningsCallAnalyzer:
         
         plt.axis('off')
         
-        # Colorbar - using exact same styling as sentiment_treemap.py
+        # Colorbar styling
         sm = mpl.cm.ScalarMappable(cmap=cmap, norm=norm)
         sm.set_array([])
         cbar = plt.colorbar(sm, ax=ax, orientation="horizontal", fraction=0.15, pad=0.08, aspect=30)
         cbar.outline.set_edgecolor('none')  # Remove the dark outline
         
-        # Add custom tick labels - updated for 0-1 range
-        cbar.set_ticks([0, 0.5, 1])
-        cbar.set_ticklabels(['Neutral', 'Moderate', 'Very Positive'])
+        # Add custom tick labels based on sentiment range
+        if min_sentiment >= 0:
+            # All positive/neutral scores: show consistent 0-1 range
+            cbar.set_ticks([0, 0.5, 1])
+            cbar.set_ticklabels(['Neutral', 'Moderately Positive', 'Very Positive'])
+        else:
+            # Has negative scores: show full -1 to 1 range
+            cbar.set_ticks([-1, 0, 1])
+            cbar.set_ticklabels(['Very Negative', 'Neutral', 'Very Positive'])
         cbar.ax.tick_params(labelsize=10)
         
-        # Title - using exact same format as sentiment_treemap.py
+        # Title
         plt.title(title, fontsize=16, weight='bold', loc='left')
         
-        plt.show()
-        
-        # Save the plot
+        # Save the plot first
         quarter_safe = self.quarter_name.replace(" ", "_").lower()
-        output_file = f'{quarter_safe}_sentiment_heatmap.png'
-        plt.savefig(output_file, dpi=300, bbox_inches='tight')
+        output_file = f'output/{quarter_safe}_sentiment_heatmap.png'
+        plt.savefig(output_file, dpi=300, bbox_inches='tight', facecolor='white')
         print(f"\nHeatmap saved as '{output_file}'")
+        
+        # Close the plot to free memory
+        plt.close()
         
         return df
     
@@ -265,6 +320,9 @@ class EarningsCallAnalyzer:
         for idx, row in sentiment_sorted.iterrows():
             sentiment_emoji = "🟢" if row['sentiment'] > 0.3 else "🟡" if row['sentiment'] > -0.3 else "🔴"
             print(f"{sentiment_emoji} {row['topic']:<40} | Sentiment: {row['sentiment']:>6.2f} | Words: {row['word_count']:>6}")
+            if 'reasoning' in row and pd.notna(row['reasoning']):
+                print(f"    Reasoning: {row['reasoning']}")
+            print()
         
         print("\n" + "-"*80)
         print("TOPICS BY SIZE (Largest to Smallest)")
@@ -275,8 +333,26 @@ class EarningsCallAnalyzer:
         for idx, row in size_sorted.iterrows():
             sentiment_emoji = "🟢" if row['sentiment'] > 0.3 else "🟡" if row['sentiment'] > -0.3 else "🔴"
             print(f"{sentiment_emoji} {row['topic']:<40} | Words: {row['word_count']:>6} | Sentiment: {row['sentiment']:>6.2f}")
+            if 'reasoning' in row and pd.notna(row['reasoning']):
+                print(f"    Reasoning: {row['reasoning']}")
+            print()
         
-        print("\n" + "="*80)
+        print("\n" + "-"*80)
+        print("DETAILED REASONING FOR EACH TOPIC")
+        print("-"*80)
+        
+        for idx, row in df.iterrows():
+            sentiment_emoji = "🟢" if row['sentiment'] > 0.3 else "🟡" if row['sentiment'] > -0.3 else "🔴"
+            print(f"{sentiment_emoji} {row['topic']}")
+            if 'reasoning' in row and pd.notna(row['reasoning']):
+                print(f"    Sentiment: {row['sentiment']:.2f}")
+                print(f"    Reasoning: {row['reasoning']}")
+            else:
+                print(f"    Sentiment: {row['sentiment']:.2f}")
+                print(f"    Reasoning: Not provided")
+            print()
+        
+        print("="*80)
 
 def main():
     """Main function to run earnings call transcript analysis."""
@@ -358,8 +434,8 @@ def main():
                 analyzer.print_summary(df)
                 print("\nAnalysis complete! Check the generated files:")
                 quarter_safe = selected_option['name'].replace(" ", "_").lower()
-                print(f"- {quarter_safe}_analysis_results.json (raw data)")
-                print(f"- {quarter_safe}_sentiment_heatmap.png (visualization)")
+                print(f"- output/{quarter_safe}_analysis_results.json (raw data)")
+                print(f"- output/{quarter_safe}_sentiment_heatmap.png (visualization)")
         
         else:
             print("Failed to analyze transcript")

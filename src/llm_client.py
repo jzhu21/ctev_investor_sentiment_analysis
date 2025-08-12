@@ -54,7 +54,7 @@ class LLMClient:
         if not api_key:
             raise RuntimeError("OPENAI_API_KEY is not set. Add it to your environment or .env file.")
         self.client = OpenAI(api_key=api_key)
-        self.model = model or os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+        self.model = model or os.getenv("OPENAI_MODEL", "gpt-5")
 
     def analyze_full_transcript(self, transcript: str, wpm: int) -> FullTranscriptAnalysis:
         """Analyze the full transcript to extract major themes and time estimates."""
@@ -69,14 +69,15 @@ class LLMClient:
             "words (estimated word count), and rationale."
         )
         
-        response = self.client.chat.completions.create(
+        response = self.client.responses.create(
             model=self.model,
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": user_prompt},
-            ],
-            temperature=0.2,
-            response_format={"type": "json_object"},
+            input=f"{SYSTEM_PROMPT}\n\n{user_prompt}",
+            text={
+                "verbosity": "detailed"
+            },
+            reasoning={
+                "effort": "minimal"
+            }
         )
         
         content = response.choices[0].message.content
@@ -100,16 +101,17 @@ class LLMClient:
         results: List[ChunkAnalysis] = []
         for chunk in chunks:
             user_prompt = USER_PROMPT_TEMPLATE.format(chunk=chunk.strip())
-            response = self.client.chat.completions.create(
+            response = self.client.responses.create(
                 model=self.model,
-                messages=[
-                    {"role": "system", "content": SYSTEM_PROMPT},
-                    {"role": "user", "content": user_prompt},
-                ],
-                temperature=0.2,
-                response_format={"type": "json_object"},
+                input=f"{SYSTEM_PROMPT}\n\n{user_prompt}",
+                text={
+                    "verbosity": "detailed"
+                },
+                reasoning={
+                    "effort": "minimal"
+                }
             )
-            content = response.choices[0].message.content
+            content = response.output[0].content[0].text
             try:
                 from json import loads
 
@@ -151,17 +153,18 @@ If a predefined topic has no relevant content, assign 0 sentiment and 0 minutes.
             "words (estimated word count), and rationale."
         )
         
-        response = self.client.chat.completions.create(
+        response = self.client.responses.create(
             model=self.model,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            temperature=0.1,  # Lower temperature for more consistent topic matching
-            response_format={"type": "json_object"},
+            input=f"{system_prompt}\n\n{user_prompt}",
+            text={
+                "verbosity": "detailed"
+            },
+            reasoning={
+                "effort": "minimal"
+            }
         )
         
-        content = response.choices[0].message.content
+        content = response.output[0].content[0].text
         try:
             from json import loads
             data: Dict = loads(content)

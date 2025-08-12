@@ -1,9 +1,11 @@
-openai>=1.0.0
-pandas>=1.5.0
-plotly>=5.0.0
-streamlit>=1.28.0
-python-dotenv>=1.0.0
-python-docx>=0.8.11
-weasyprint>=60.0
-matplotlib>=3.5.0
-squarify>=0.4.3
+# Core dependencies for earnings call sentiment analysis
+openai>=1.0.0                    # OpenAI API client for GPT-5
+pandas>=1.5.0                    # Data manipulation and analysis
+matplotlib>=3.5.0                # Plotting and visualization
+squarify>=0.4.3                  # Treemap generation
+numpy>=1.21.0                    # Numerical computing
+python-dotenv>=1.0.0             # Environment variable management
+
+# Optional dependencies for advanced features
+pydantic>=2.0.0                  # Data validation (used in llm_client.py)
+plotly>=5.0.0                    # Interactive visualizations (used in report.py)

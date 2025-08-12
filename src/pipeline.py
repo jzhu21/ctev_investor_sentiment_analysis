@@ -18,7 +18,7 @@ load_dotenv()
 class PipelineConfig:
     input_path: Path
     words_per_minute: int = 155
-    model: str = "gpt-4o-mini"
+    model: str = "gpt-5"
     max_topics: int = 10
     custom_topics: Optional[List[str]] = None
 
