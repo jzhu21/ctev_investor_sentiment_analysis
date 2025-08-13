@@ -18,32 +18,68 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Custom CSS for better styling
+# Custom CSS for better styling with mobile compatibility
 st.markdown("""
 <style>
+    /* Main header with mobile-friendly colors */
     .main-header {
         font-size: 2.5rem;
         font-weight: bold;
-        color: #1f77b4;
+        color: #1f77b4 !important;
         text-align: center;
         margin-bottom: 2rem;
     }
+    
+    /* Info boxes with consistent colors across devices */
     .hover-info {
-        background-color: #e8f4fd;
+        background-color: #e8f4fd !important;
         padding: 1rem;
         border-radius: 0.5rem;
-        border: 1px solid #1f77b4;
+        border: 2px solid #1f77b4 !important;
         margin: 1rem 0;
+        color: #000000 !important;
     }
-    /* Make tabs bigger */
+    
+    /* Make tabs bigger and ensure consistent colors */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
     }
+    
     .stTabs [data-baseweb="tab"] {
         height: 60px;
         font-size: 30px;
         font-weight: bold;
         padding: 10px 20px;
+        color: #000000 !important;
+    }
+    
+    /* Mobile-specific fixes */
+    @media (max-width: 768px) {
+        .main-header {
+            font-size: 2rem;
+            color: #1f77b4 !important;
+        }
+        
+        .hover-info {
+            background-color: #e8f4fd !important;
+            border-color: #1f77b4 !important;
+            color: #000000 !important;
+        }
+        
+        .stTabs [data-baseweb="tab"] {
+            font-size: 24px;
+            color: #000000 !important;
+        }
+    }
+    
+    /* Force color consistency across all browsers and devices */
+    * {
+        -webkit-text-fill-color: initial !important;
+    }
+    
+    /* Ensure text colors are consistent */
+    h1, h2, h3, h4, h5, h6, p, span, div {
+        color: inherit !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -83,9 +119,10 @@ def display_quarter_tab(quarter_name, json_file, png_file):
     if os.path.exists(json_file):
         df = load_quarter_data(json_file)
         if not df.empty:
-            # Display PNG file
+            # Display PNG file with mobile optimization
             if os.path.exists(png_file):
-                st.image(png_file, use_container_width=False)
+                # Use container width on mobile for better responsiveness
+                st.image(png_file, use_container_width=True)
             else:
                 st.warning("PNG file not found. Please run the analysis first.")
             
