@@ -55,9 +55,21 @@ st.markdown("""
     
     /* Mobile-specific fixes */
     @media (max-width: 768px) {
+        /* Force white background on mobile */
+        body, .main, .stApp {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+        }
+        
+        /* Ensure all containers have white background */
+        .block-container, .stMarkdown, .stTabs {
+            background-color: #ffffff !important;
+        }
+        
         .main-header {
             font-size: 2rem;
             color: #1f77b4 !important;
+            background-color: #ffffff !important;
         }
         
         .hover-info {
@@ -69,6 +81,12 @@ st.markdown("""
         .stTabs [data-baseweb="tab"] {
             font-size: 24px;
             color: #000000 !important;
+            background-color: #ffffff !important;
+        }
+        
+        /* Force white background for tab content */
+        .stTabs [data-baseweb="tab-panel"] {
+            background-color: #ffffff !important;
         }
     }
     
@@ -80,6 +98,16 @@ st.markdown("""
     /* Ensure text colors are consistent */
     h1, h2, h3, h4, h5, h6, p, span, div {
         color: inherit !important;
+    }
+    
+    /* Global background fixes for all devices */
+    .stApp, .main, .block-container {
+        background-color: #ffffff !important;
+    }
+    
+    /* Ensure Streamlit elements have white background */
+    .stMarkdown, .stTabs, .stImage {
+        background-color: #ffffff !important;
     }
 </style>
 """, unsafe_allow_html=True)
