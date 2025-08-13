@@ -1,0 +1,72 @@
+[
+  {
+    "topic": "Operating Costs",
+    "word_count": 150,
+    "sentiment": 0.7
+  },
+  {
+    "topic": "Technology",
+    "word_count": 200,
+    "sentiment": 0.8
+  },
+  {
+    "topic": "EBITDA",
+    "word_count": 120,
+    "sentiment": 0.4
+  },
+  {
+    "topic": "Net Income",
+    "word_count": 0,
+    "sentiment": 0.5
+  },
+  {
+    "topic": "Guidance",
+    "word_count": 180,
+    "sentiment": 0.6
+  },
+  {
+    "topic": "Capital",
+    "word_count": 150,
+    "sentiment": 0.7
+  },
+  {
+    "topic": "Revenue",
+    "word_count": 150,
+    "sentiment": 0.5
+  },
+  {
+    "topic": "Products",
+    "word_count": 200,
+    "sentiment": 0.9
+  },
+  {
+    "topic": "Debt",
+    "word_count": 100,
+    "sentiment": 0.6
+  },
+  {
+    "topic": "Sales",
+    "word_count": 180,
+    "sentiment": 0.7
+  },
+  {
+    "topic": "Customers",
+    "word_count": 150,
+    "sentiment": 0.8
+  },
+  {
+    "topic": "Govt.",
+    "word_count": 0,
+    "sentiment": 0.5
+  },
+  {
+    "topic": "Margins",
+    "word_count": 0,
+    "sentiment": 0.5
+  },
+  {
+    "topic": "Market Share",
+    "word_count": 0,
+    "sentiment": 0.5
+  }
+]

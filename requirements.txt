@@ -8,4 +8,6 @@ python-dotenv>=1.0.0             # Environment variable management
 
 # Optional dependencies for advanced features
 pydantic>=2.0.0                  # Data validation (used in llm_client.py)
-plotly>=5.0.0                    # Interactive visualizations (used in report.py)
+
+# Streamlit web app dependencies
+streamlit>=1.28.0                # Web application framework

@@ -1,0 +1,72 @@
+[
+  {
+    "topic": "Introduction and Call Guidelines",
+    "word_count": 152,
+    "sentiment": 0.1
+  },
+  {
+    "topic": "Forward Looking Statements and Non-GAAP Measures",
+    "word_count": 113,
+    "sentiment": -0.2
+  },
+  {
+    "topic": "Company Performance and Guiding Principles",
+    "word_count": 128,
+    "sentiment": 0.8
+  },
+  {
+    "topic": "Market Verticals and Organizational Alignment",
+    "word_count": 130,
+    "sentiment": 0.7
+  },
+  {
+    "topic": "Digital Transformation and Product Development",
+    "word_count": 105,
+    "sentiment": 0.6
+  },
+  {
+    "topic": "New Logos and Contract Value",
+    "word_count": 59,
+    "sentiment": 0.8
+  },
+  {
+    "topic": "Operating Model and Product Roadmaps",
+    "word_count": 46,
+    "sentiment": 0.5
+  },
+  {
+    "topic": "Partnership with Burjeel and Market Expansion",
+    "word_count": 47,
+    "sentiment": 0.8
+  },
+  {
+    "topic": "Pipeline Development and Growth",
+    "word_count": 72,
+    "sentiment": 0.9
+  },
+  {
+    "topic": "Transformational Changes and Key Pillars",
+    "word_count": 73,
+    "sentiment": 0.6
+  },
+  {
+    "topic": "Performance Management and Objectives",
+    "word_count": 52,
+    "sentiment": 0.7
+  },
+  {
+    "topic": "Focus on Core Client Base and Product Sets",
+    "word_count": 60,
+    "sentiment": 0.6
+  },
+  {
+    "topic": "Client Relationships and Renewals",
+    "word_count": 72,
+    "sentiment": 0.9
+  },
+  {
+    "topic": "TPA Segment and New Agreements",
+    "word_count": 46,
+    "sentiment": 0.8
+  }
+]

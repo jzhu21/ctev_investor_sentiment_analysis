@@ -27,20 +27,20 @@ wheels/
 MANIFEST
 
 # Virtual environments
-.venv/
 venv/
-ENV/
 env/
-.venv/
+ENV/
+env.bak/
+venv.bak/
 
-# IDE and editor files
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# OS generated files
+# OS
 .DS_Store
 .DS_Store?
 ._*
@@ -49,16 +49,15 @@ env/
 ehthumbs.db
 Thumbs.db
 
-# Reports and output
-reports/
-*.html
-
-# JSON files (but allow analysis results)
-*.json
-!output/*.json
-
 # Logs
 *.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
 
 # Jupyter Notebook
 .ipynb_checkpoints
@@ -66,8 +65,9 @@ reports/
 # pyenv
 .python-version
 
-# pipenv
-Pipfile.lock
+# Streamlit
+.streamlit/
 
-# PEP 582
-__pypackages__/
+# Analysis outputs (optional - remove if you want to commit these)
+# output/
+# data/

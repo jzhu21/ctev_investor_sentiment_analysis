@@ -69,6 +69,12 @@ python src/ctev_earnings_call_analysis.py
 # Or run individual modules
 python src/pipeline.py
 python src/cli.py
+
+# Run the Streamlit web app (after analysis is complete)
+streamlit run streamlit_app.py
+
+# Or use the provided script
+./run_streamlit.sh
 ```
 
 The script will prompt you to select an earnings call transcript to analyze.
@@ -87,6 +93,28 @@ The script will prompt you to select an earnings call transcript to analyze.
 - **Sentiment Heatmap**: Squarify treemap showing topic size (word count) and color (sentiment)
 - **Dynamic Color Scaling**: Automatically adjusts colorbar based on sentiment range
 - **Detailed Analysis**: Comprehensive breakdown of analysis results with reasoning
+
+### Web Application
+- **Streamlit Dashboard**: Interactive web interface with separate tabs for each quarter
+- **Interactive Treemaps**: Hover-like functionality using topic selectors to explore sentiment details
+- **Real-time Metrics**: Key performance indicators and sentiment analysis for each quarter
+
+## 🌐 Deployment
+
+### Streamlit Cloud (Recommended)
+1. Push code to GitHub
+2. Go to [share.streamlit.io](https://share.streamlit.io)
+3. Connect GitHub repo
+4. Set main file: `streamlit_app.py`
+5. Deploy!
+
+### Other Platforms
+See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for detailed deployment options including:
+- Heroku
+- AWS/GCP/Azure
+- Docker containers
+- Local production servers
+- **Responsive Design**: Modern UI with intuitive navigation and data exploration
 
 
 

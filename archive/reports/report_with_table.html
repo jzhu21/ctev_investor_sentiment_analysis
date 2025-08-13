@@ -1,0 +1,122 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Earnings Call Sentiment Analysis</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            .container { max-width: 1200px; margin: 0 auto; }
+            .treemap-container { margin-bottom: 40px; }
+            .table-container { margin-top: 40px; }
+            table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+            th, td { 
+                border: 1px solid #ddd; 
+                padding: 12px; 
+                text-align: left; 
+                vertical-align: top;
+            }
+            th { 
+                background-color: #f2f2f2; 
+                font-weight: bold; 
+                text-align: center;
+            }
+            .sentiment-positive { color: #238443; font-weight: bold; }
+            .sentiment-negative { color: #d73027; font-weight: bold; }
+            .sentiment-neutral { color: #666; font-weight: bold; }
+            .topic-header { 
+                background-color: #4a90e2; 
+                color: white; 
+                font-weight: bold;
+            }
+            .time-info { color: #666; font-size: 0.9em; }
+            .rationale { font-style: italic; color: #555; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Earnings Call Sentiment Analysis</h1>
+            
+            <div class="treemap-container">
+                <h2>Sentiment Treemap</h2>
+                <p>Topic size represents time spent, color represents sentiment (red=negative, green=positive)</p>
+                <div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.0.1.min.js" integrity="sha256-oy6Be7Eh6eiQFs5M7oXuPxxm9qbJXEtTpfSI93dW16Q=" crossorigin="anonymous"></script>                <div id="2821bd64-cf0d-4186-a34a-19dbf3f1cc39" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("2821bd64-cf0d-4186-a34a-19dbf3f1cc39")) {                    Plotly.newPlot(                        "2821bd64-cf0d-4186-a34a-19dbf3f1cc39",                        [{"branchvalues":"total","customdata":[[10.0,0.8,"Financial Performance","1500"],[8.0,0.7,"Business Operations","1200"],[7.0,0.9,"Growth & Expansion","1000"],[6.0,0.8000000000000002,"Strategy & Vision","900"],[5.0,0.6,"Market & Competition","800"],[4.0,0.7,"Customer & Demand","600"],[3.0,0.8000000000000002,"Technology & Innovation","500"],[43.0,0.7651162790697674,"(?)","(?)"]],"domain":{"x":[0.0,1.0],"y":[0.0,1.0]},"hovertemplate":"labels=%{label}\u003cbr\u003eminutes=%{customdata[0]:.2f}\u003cbr\u003eparent=%{parent}\u003cbr\u003eid=%{id}\u003cbr\u003esentiment=%{color:.2f}\u003cbr\u003etopic=%{customdata[2]}\u003cbr\u003ewords=%{customdata[3]}\u003cextra\u003e\u003c\u002fextra\u003e","ids":["Earnings Call\u002fFinancial Performance","Earnings Call\u002fBusiness Operations","Earnings Call\u002fGrowth & Expansion","Earnings Call\u002fStrategy & Vision","Earnings Call\u002fMarket & Competition","Earnings Call\u002fCustomer & Demand","Earnings Call\u002fTechnology & Innovation","Earnings Call"],"labels":["Financial Performance","Business Operations","Growth & Expansion","Strategy & Vision","Market & Competition","Customer & Demand","Technology & Innovation","Earnings Call"],"marker":{"coloraxis":"coloraxis","colors":{"dtype":"f8","bdata":"mpmZmZmZ6T9mZmZmZmbmP83MzMzMzOw\u002fm5mZmZmZ6T8zMzMzMzPjP2ZmZmZmZuY\u002fm5mZmZmZ6T9SvYci1XvoPw=="}},"name":"","parents":["Earnings Call","Earnings Call","Earnings Call","Earnings Call","Earnings Call","Earnings Call","Earnings Call",""],"values":{"dtype":"f8","bdata":"AAAAAAAAJEAAAAAAAAAgQAAAAAAAABxAAAAAAAAAGEAAAAAAAAAUQAAAAAAAABBAAAAAAAAACEAAAAAAAIBFQA=="},"type":"treemap","root":{"color":"lightgrey"}}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"coloraxis":{"colorbar":{"title":{"text":"sentiment"}},"colorscale":[[0.0,"#fff7bc"],[0.2,"#d9f0a3"],[0.5,"#addd8e"],[0.8,"#78c679"],[1.0,"#238443"]],"cmid":0.0,"cmin":0.0,"cmax":1.0},"legend":{"tracegroupgap":0},"margin":{"t":60,"l":10,"r":10,"b":10},"title":{"text":"Earnings Call Sentiment by Topic (size=time, color=sentiment)"}},                        {"responsive": true}                    )                };            </script>        </div>
+            </div>
+            
+            <div class="table-container">
+                <h2>Detailed Topic Analysis</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="topic-header">Topic</th>
+                            <th>Sentiment Score</th>
+                            <th>Time Spent</th>
+                            <th>Word Count</th>
+                            <th>Rationale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    
+                        <tr>
+                            <td><strong>Financial Performance</strong></td>
+                            <td class="sentiment-positive">0.800</td>
+                            <td class="time-info">10.0 minutes</td>
+                            <td class="time-info">1,500 words</td>
+                            <td class="rationale">The discussion highlighted year-on-year revenue growth, guidance raises, and successful contract signings, indicating strong financial health and positive outlook.</td>
+                        </tr>
+        
+                        <tr>
+                            <td><strong>Business Operations</strong></td>
+                            <td class="sentiment-positive">0.700</td>
+                            <td class="time-info">8.0 minutes</td>
+                            <td class="time-info">1,200 words</td>
+                            <td class="rationale">The call emphasized improvements in operating models, efficiency in processes, and alignment of teams, showcasing a focus on operational excellence.</td>
+                        </tr>
+        
+                        <tr>
+                            <td><strong>Growth & Expansion</strong></td>
+                            <td class="sentiment-positive">0.900</td>
+                            <td class="time-info">7.0 minutes</td>
+                            <td class="time-info">1,000 words</td>
+                            <td class="rationale">Significant focus on new market segments, product launches, and pipeline growth indicates a strong commitment to expansion and innovation.</td>
+                        </tr>
+        
+                        <tr>
+                            <td><strong>Strategy & Vision</strong></td>
+                            <td class="sentiment-positive">0.800</td>
+                            <td class="time-info">6.0 minutes</td>
+                            <td class="time-info">900 words</td>
+                            <td class="rationale">The leadership articulated a clear vision for the future, emphasizing strategic initiatives and alignment of talent to achieve long-term goals.</td>
+                        </tr>
+        
+                        <tr>
+                            <td><strong>Market & Competition</strong></td>
+                            <td class="sentiment-positive">0.600</td>
+                            <td class="time-info">5.0 minutes</td>
+                            <td class="time-info">800 words</td>
+                            <td class="rationale">The company discussed its competitive position, including new client acquisitions and market expansion, reflecting a proactive approach to competition.</td>
+                        </tr>
+        
+                        <tr>
+                            <td><strong>Customer & Demand</strong></td>
+                            <td class="sentiment-positive">0.700</td>
+                            <td class="time-info">4.0 minutes</td>
+                            <td class="time-info">600 words</td>
+                            <td class="rationale">The call included insights on customer behavior, demand trends, and successful renewals, indicating a strong relationship with clients.</td>
+                        </tr>
+        
+                        <tr>
+                            <td><strong>Technology & Innovation</strong></td>
+                            <td class="sentiment-positive">0.800</td>
+                            <td class="time-info">3.0 minutes</td>
+                            <td class="time-info">500 words</td>
+                            <td class="rationale">Discussion around digital transformation and product development highlighted the company's commitment to leveraging technology for growth.</td>
+                        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+    </html>
+    
